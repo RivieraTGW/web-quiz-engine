@@ -19,13 +19,13 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public QuizResponse getQuiz() {
-        final Quiz quiz = quizRepository.getQuiz();
+        Quiz quiz = quizRepository.getQuiz();
         return QuizResponse.from(quiz);
     }
 
     @Override
-    public SolveResponse solveQuiz(final int answer) {
-        final boolean success = answer == quizRepository.getQuiz().getAnswer();
+    public SolveResponse solveQuiz(int answer) {
+        boolean success = answer == quizRepository.getQuiz().getAnswer();
         return success ? SolveResponse.correct() : SolveResponse.wrong();
     }
 }
