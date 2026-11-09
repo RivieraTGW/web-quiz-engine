@@ -3,6 +3,7 @@ package engine.service.impl;
 import org.springframework.stereotype.Service;
 
 import engine.dto.QuizResponse;
+import engine.dto.SolveResponse;
 import engine.model.Quiz;
 import engine.repository.QuizRepository;
 import engine.service.QuizService;
@@ -20,5 +21,11 @@ public class QuizServiceImpl implements QuizService {
     public QuizResponse getQuiz() {
         final Quiz quiz = quizRepository.getQuiz();
         return QuizResponse.from(quiz);
+    }
+
+    @Override
+    public SolveResponse solveQuiz(final int answer) {
+        final boolean success = answer == quizRepository.getQuiz().getAnswer();
+        return success ? SolveResponse.correct() : SolveResponse.wrong();
     }
 }
