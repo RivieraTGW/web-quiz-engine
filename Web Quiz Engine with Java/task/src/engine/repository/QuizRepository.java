@@ -9,7 +9,7 @@ import engine.model.Quiz;
 @Repository
 public class QuizRepository {
 
-    private final Quiz quiz = new Quiz();;
+    private final Quiz quiz = new Quiz();
 
     public QuizRepository() {
         initDummyQuiz();
