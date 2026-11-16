@@ -10,6 +10,13 @@ public class Quiz {
     private List<String> options;
     private int answer;
 
+    public Quiz(String title, String text, List<String> options, int answer) {
+        this.title = title;
+        this.text = text;
+        this.options = options;
+        this.answer = answer;
+    }
+
     public Long getId() {
         return id;
     }

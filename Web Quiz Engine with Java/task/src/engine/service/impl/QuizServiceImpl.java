@@ -2,6 +2,7 @@ package engine.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import engine.dto.QuizRequest;
 import engine.dto.QuizResponse;
 import engine.dto.SolveResponse;
 import engine.exception.QuizNotFoundException;
@@ -16,6 +17,12 @@ public class QuizServiceImpl implements QuizService {
 
     public QuizServiceImpl(QuizRepository quizRepository) {
         this.quizRepository = quizRepository;
+    }
+
+    @Override
+    public QuizResponse createQuiz(QuizRequest quizRequest) {
+        Quiz quiz = QuizRequest.toQuiz(quizRequest);
+        return QuizResponse.from(quizRepository.save(quiz));
     }
 
     @Override
