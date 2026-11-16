@@ -1,7 +1,12 @@
 package engine.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import engine.dto.QuizResponse;
 import engine.dto.SolveResponse;
@@ -18,8 +23,8 @@ public class QuizController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<QuizResponse> getQuizById(@PathVariable Long id) {
-        return ResponseEntity.ok(quizService.getQuizById(id));
+    public ResponseEntity<QuizResponse> getQuiz(@PathVariable Long id) {
+        return ResponseEntity.ok(quizService.getQuiz(id));
     }
 
     @PostMapping("/{id}/solve")

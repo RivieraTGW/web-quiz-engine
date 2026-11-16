@@ -19,16 +19,17 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public QuizResponse getQuizById(Long id) {
-        return QuizResponse.from(quizRepository.findById(id)
-                .orElseThrow(() -> new QuizNotFoundException(id)));
+    public QuizResponse getQuiz(Long id) {
+        return QuizResponse.from(findQuiz(id));
     }
 
     @Override
     public SolveResponse solveQuiz(Long id, int answer) {
-        Quiz quiz = quizRepository.findById(id)
+        return answer == findQuiz(id).getAnswer() ? SolveResponse.correct() : SolveResponse.wrong();
+    }
+
+    private Quiz findQuiz(Long id) {
+        return quizRepository.findById(id)
                 .orElseThrow(() -> new QuizNotFoundException(id));
-        boolean success = answer == quiz.getAnswer();
-        return success ? SolveResponse.correct() : SolveResponse.wrong();
     }
 }
