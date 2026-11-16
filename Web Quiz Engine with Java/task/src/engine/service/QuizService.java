@@ -5,6 +5,6 @@ import engine.dto.SolveResponse;
 
 public interface QuizService {
 
-    QuizResponse getQuiz();
-    SolveResponse solveQuiz(int answer);
+    QuizResponse getQuizById(Long id);
+    SolveResponse solveQuiz(Long id, int answer);
 }
