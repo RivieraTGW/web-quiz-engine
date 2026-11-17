@@ -1,5 +1,7 @@
 package engine.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,11 @@ public class QuizController {
     @GetMapping("/{id}")
     public ResponseEntity<QuizResponse> getQuiz(@PathVariable Long id) {
         return ResponseEntity.ok(quizService.getQuiz(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<QuizResponse>> getAllQuizzes() {
+        return ResponseEntity.ok(quizService.getAllQuizzes());
     }
 
     @PostMapping("/{id}/solve")

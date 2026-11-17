@@ -1,5 +1,7 @@
 package engine.repository;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,5 +25,11 @@ public class QuizRepository {
 
     public Optional<Quiz> findById(Long id) {
         return Optional.ofNullable(quizzes.get(id));
+    }
+
+    public List<Quiz> findAll() {
+        return quizzes.values().stream()
+                .sorted(Comparator.comparing(Quiz::getId))
+                .toList();
     }
 }
