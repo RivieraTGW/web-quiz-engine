@@ -1,6 +1,5 @@
 package engine.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,9 +34,9 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<QuizResponse> getAllQuizzes() {
-        List<QuizResponse> quizResponses = new ArrayList<>();
-        quizRepository.findAll().forEach(quiz -> quizResponses.add(QuizResponse.from(quiz)));
-        return quizResponses;
+        return quizRepository.findAll().stream()
+                .map(QuizResponse::from)
+                .toList();
     }
 
     @Override
