@@ -1,6 +1,7 @@
 package engine.controller;
 
 import java.util.List;
+import jakarta.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import engine.dto.QuizRequest;
 import engine.dto.QuizResponse;
+import engine.dto.SolveRequest;
 import engine.dto.SolveResponse;
 import engine.service.QuizService;
 
@@ -27,7 +29,7 @@ public class QuizController {
     }
 
     @PostMapping
-    public ResponseEntity<QuizResponse> createQuiz(@RequestBody QuizRequest quizRequest) {
+    public ResponseEntity<QuizResponse> createQuiz(@Valid @RequestBody QuizRequest quizRequest) {
         return ResponseEntity.ok(quizService.createQuiz(quizRequest));
     }
 
@@ -42,7 +44,7 @@ public class QuizController {
     }
 
     @PostMapping("/{id}/solve")
-    public ResponseEntity<SolveResponse> solveQuiz(@PathVariable Long id, @RequestParam int answer) {
-        return ResponseEntity.ok(quizService.solveQuiz(id, answer));
+    public ResponseEntity<SolveResponse> solveQuiz(@PathVariable Long id, @Valid @RequestBody SolveRequest solveRequest) {
+        return ResponseEntity.ok(quizService.solveQuiz(id, solveRequest));
     }
 }

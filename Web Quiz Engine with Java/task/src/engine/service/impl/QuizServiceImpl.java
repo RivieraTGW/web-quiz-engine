@@ -1,11 +1,14 @@
 package engine.service.impl;
 
 import java.util.List;
+import java.util.Set;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 
 import engine.dto.QuizRequest;
 import engine.dto.QuizResponse;
+import engine.dto.SolveRequest;
 import engine.dto.SolveResponse;
 import engine.exception.QuizNotFoundException;
 import engine.model.Quiz;
@@ -40,8 +43,10 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public SolveResponse solveQuiz(Long id, int answer) {
-        return answer == findQuiz(id).getAnswer() ? SolveResponse.correct() : SolveResponse.wrong();
+    public SolveResponse solveQuiz(Long id, SolveRequest solveRequest) {
+        Set<Integer> quizAnswerAsSet = Set.copyOf(findQuiz(id).getAnswer());
+        Set<Integer> requestAnswerAsSet = Set.copyOf(solveRequest.answer());
+        return quizAnswerAsSet.equals(requestAnswerAsSet) ? SolveResponse.correct() : SolveResponse.wrong();
     }
 
     private Quiz findQuiz(Long id) {

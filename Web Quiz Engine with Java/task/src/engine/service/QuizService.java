@@ -4,6 +4,7 @@ import java.util.List;
 
 import engine.dto.QuizRequest;
 import engine.dto.QuizResponse;
+import engine.dto.SolveRequest;
 import engine.dto.SolveResponse;
 
 public interface QuizService {
@@ -11,5 +12,5 @@ public interface QuizService {
     QuizResponse createQuiz(QuizRequest quizRequest);
     QuizResponse getQuiz(Long id);
     List<QuizResponse> getAllQuizzes();
-    SolveResponse solveQuiz(Long id, int answer);
+    SolveResponse solveQuiz(Long id, SolveRequest solveRequest);
 }
